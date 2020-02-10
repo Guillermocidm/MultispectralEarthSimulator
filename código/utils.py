@@ -10,7 +10,18 @@ import cv2
 def mirar_size(s,path1,path2,):
   l = os.listdir(path)
 
-
+def selectForest(pathTCI,pathSCL):
+  l = os.listdir(pathTCI)
+  for i in l:
+    imSCL = Image.open(pathSCL+i)
+    imTCI = Image.open(pathTCI+i)
+    imSCL = np.array(imSCL)
+    u = np.unique(imSCL)
+    if u.shape[0] == 1 and u[0] == 4:
+      if imTCI.size == (1024,1024):
+        hacerdir('./forestTCI/')
+        shutil.move(pathTCI+i,'./forestTCI/')
+    
 def blurrear(im):
  return cv2.GaussianBlur(im,(181,181),0)
  
